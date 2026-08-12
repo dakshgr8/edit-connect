@@ -84,72 +84,71 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
           </div>
 
           <div>
-            <Card className="shadow-[12px_12px_0px_var(--color-tertiary)] border-4 border-foreground bg-accent text-white">
-              <CardContent className="p-8 md:p-12 space-y-8">
+            <Card className="shadow-[8px_8px_0px_var(--color-tertiary)] md:shadow-[12px_12px_0px_var(--color-tertiary)] border-4 border-foreground bg-accent text-white">
+              <CardContent className="p-4 sm:p-8 md:p-12 space-y-6 md:space-y-8">
                 <div className="text-center space-y-2">
-                  <h3 className="font-display font-extrabold text-4xl">Ready to Edit?</h3>
-                  <p className="text-white/80 font-bold text-lg">Submit your proposal and pitch why you're the best editor for the job.</p>
+                  <h3 className="font-display font-extrabold text-3xl md:text-4xl">Ready to Edit?</h3>
+                  <p className="text-white/80 font-bold text-base md:text-lg px-2">Submit your proposal and pitch why you're the best editor for the job.</p>
                 </div>
                 
                 {hasApplied ? (
-                  <div className="bg-green-100 border-2 border-green-400 p-8 rounded-xl text-center font-bold text-green-800 shadow-[var(--shadow-pop)] max-w-2xl mx-auto">
-                    <CheckCircle className="mx-auto mb-4" size={48} />
-                    <span className="text-2xl font-display">You have successfully applied!</span>
-                    <p className="mt-2 font-medium text-green-700">The client will review your application and message you if it's a match.</p>
+                  <div className="bg-green-100 border-2 border-green-400 p-6 md:p-8 rounded-xl text-center font-bold text-green-800 shadow-[var(--shadow-pop)] max-w-2xl mx-auto">
+                    <CheckCircle className="mx-auto mb-4 w-10 h-10 md:w-12 md:h-12" />
+                    <span className="text-xl md:text-2xl font-display block">You have successfully applied!</span>
+                    <p className="mt-2 font-medium text-sm md:text-base text-green-700">The client will review your application and message you if it's a match.</p>
                   </div>
                 ) : !user ? (
-                  <div className="text-center space-y-6 bg-white/10 p-12 rounded-2xl border-2 border-white/20 max-w-2xl mx-auto">
-                    <p className="font-medium text-xl">You need an account to apply for projects.</p>
-                    <Button nativeButton={false} render={<Link href={`/login?next=/jobs/${id}`} className="block w-full h-full text-center flex items-center justify-center" />} className="w-full max-w-md mx-auto bg-white text-foreground hover:bg-tertiary shadow-[var(--shadow-pop)] h-14 font-bold text-xl">
+                  <div className="text-center space-y-4 md:space-y-6 bg-white/10 p-6 md:p-12 rounded-xl md:rounded-2xl border-2 border-white/20 max-w-2xl mx-auto">
+                    <p className="font-medium text-lg md:text-xl">You need an account to apply for projects.</p>
+                    <Button nativeButton={false} render={<Link href={`/login?next=/jobs/${id}`} className="block w-full h-full text-center flex items-center justify-center" />} className="w-full max-w-md mx-auto bg-white text-foreground hover:bg-tertiary shadow-[var(--shadow-pop)] h-12 md:h-14 font-bold text-lg md:text-xl">
                       Log in to Apply
                     </Button>
                   </div>
                 ) : membershipTier === 'none' ? (
-                  <div className="text-center space-y-6 bg-white/10 p-12 rounded-2xl border-2 border-white/20 max-w-2xl mx-auto">
-                    <p className="font-medium text-xl">You need an active Editor membership to apply for projects.</p>
-                    <Button nativeButton={false} render={<Link href="/pricing" className="block w-full h-full text-center flex items-center justify-center" />} className="w-full max-w-md mx-auto bg-tertiary text-foreground hover:bg-quaternary shadow-[var(--shadow-pop)] h-14 font-bold text-xl">
+                  <div className="text-center space-y-4 md:space-y-6 bg-white/10 p-6 md:p-12 rounded-xl md:rounded-2xl border-2 border-white/20 max-w-2xl mx-auto">
+                    <p className="font-medium text-lg md:text-xl">You need an active Editor membership to apply for projects.</p>
+                    <Button nativeButton={false} render={<Link href="/pricing" className="block w-full h-full text-center flex items-center justify-center" />} className="w-full max-w-md mx-auto bg-tertiary text-foreground hover:bg-quaternary shadow-[var(--shadow-pop)] h-12 md:h-14 font-bold text-lg md:text-xl">
                       Upgrade Membership
                     </Button>
                   </div>
                 ) : (
-                  <form action={applyToJob} className="space-y-8 bg-white text-foreground p-8 md:p-12 rounded-2xl border-4 border-foreground shadow-[var(--shadow-pop)] max-w-4xl mx-auto">
+                  <form action={applyToJob} className="space-y-6 md:space-y-8 bg-white text-foreground p-5 sm:p-8 md:p-12 rounded-xl md:rounded-2xl border-4 border-foreground shadow-[var(--shadow-pop)] max-w-4xl mx-auto">
                     <input type="hidden" name="projectId" value={project.id} />
-                    <div className="space-y-4">
-                      <Label htmlFor="coverLetter" className="text-xl font-bold font-display flex items-center gap-2">
-                        <span className="bg-tertiary text-white w-8 h-8 flex items-center justify-center rounded-full border-2 border-foreground shadow-[2px_2px_0px_#1E293B]">1</span>
+                    <div className="space-y-3 md:space-y-4">
+                      <Label htmlFor="coverLetter" className="text-lg md:text-xl font-bold font-display flex items-center gap-2">
+                        <span className="bg-tertiary text-white w-6 h-6 md:w-8 md:h-8 text-sm md:text-base flex items-center justify-center rounded-full border-2 border-foreground shadow-[2px_2px_0px_#1E293B] shrink-0">1</span>
                         Your Cover Letter & Pitch
                       </Label>
-                      <p className="text-sm text-slate-500 font-bold mb-2">Explain why your editing style matches this project and include relevant portfolio links.</p>
+                      <p className="text-xs md:text-sm text-slate-500 font-bold mb-2">Explain why your editing style matches this project and include relevant portfolio links.</p>
                       <textarea 
                         id="coverLetter" 
                         name="coverLetter"
                         required
-                        rows={8}
-                        className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 px-6 py-4 text-base font-medium text-foreground transition-all duration-300 outline-none shadow-[4px_4px_0px_transparent] focus-visible:border-accent focus-visible:bg-white focus-visible:shadow-[4px_4px_0px_var(--color-accent)] resize-y"
+                        className="w-full min-h-[160px] md:min-h-[220px] rounded-xl border-2 border-slate-300 bg-slate-50 px-4 md:px-6 py-3 md:py-4 text-sm md:text-base font-medium text-foreground transition-all duration-300 outline-none shadow-[4px_4px_0px_transparent] focus-visible:border-accent focus-visible:bg-white focus-visible:shadow-[4px_4px_0px_var(--color-accent)] resize-y"
                         placeholder="Hi! I have 3 years of experience editing exactly this type of video..."
                       />
                     </div>
-                    <div className="space-y-4">
-                      <Label htmlFor="proposedFee" className="text-xl font-bold font-display flex items-center gap-2">
-                        <span className="bg-secondary text-white w-8 h-8 flex items-center justify-center rounded-full border-2 border-foreground shadow-[2px_2px_0px_#1E293B]">2</span>
+                    <div className="space-y-3 md:space-y-4">
+                      <Label htmlFor="proposedFee" className="text-lg md:text-xl font-bold font-display flex items-center gap-2">
+                        <span className="bg-secondary text-white w-6 h-6 md:w-8 md:h-8 text-sm md:text-base flex items-center justify-center rounded-full border-2 border-foreground shadow-[2px_2px_0px_#1E293B] shrink-0">2</span>
                         Your Proposed Fee (₹)
                       </Label>
-                      <p className="text-sm text-slate-500 font-bold mb-2">The client has set a budget of ₹{project.budget}, but you can negotiate your fee.</p>
+                      <p className="text-xs md:text-sm text-slate-500 font-bold mb-2">The client has set a budget of ₹{project.budget}, but you can negotiate your fee.</p>
                       <div className="relative max-w-md">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-500 text-xl">₹</span>
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-500 text-lg md:text-xl">₹</span>
                         <input 
                           type="number"
                           id="proposedFee" 
                           name="proposedFee"
                           required
-                          className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 pl-10 pr-6 py-4 text-xl font-black text-foreground transition-all duration-300 outline-none shadow-[4px_4px_0px_transparent] focus-visible:border-accent focus-visible:bg-white focus-visible:shadow-[4px_4px_0px_var(--color-accent)]"
+                          className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 pl-10 pr-4 md:pr-6 py-3 md:py-4 text-lg md:text-xl font-black text-foreground transition-all duration-300 outline-none shadow-[4px_4px_0px_transparent] focus-visible:border-accent focus-visible:bg-white focus-visible:shadow-[4px_4px_0px_var(--color-accent)]"
                           placeholder="e.g. 8000"
                           defaultValue={project.budget}
                         />
                       </div>
                     </div>
-                    <div className="pt-6 border-t-2 border-dashed border-slate-300">
-                      <Button type="submit" size="lg" className="w-full bg-quaternary text-foreground hover:bg-tertiary shadow-[var(--shadow-pop)] h-16 font-black text-2xl uppercase tracking-wide">
+                    <div className="pt-4 md:pt-6 border-t-2 border-dashed border-slate-300">
+                      <Button type="submit" size="lg" className="w-full bg-quaternary text-foreground hover:bg-tertiary shadow-[var(--shadow-pop)] h-14 md:h-16 font-black text-lg md:text-2xl uppercase tracking-wide px-2 text-wrap">
                         Submit Application
                       </Button>
                     </div>
