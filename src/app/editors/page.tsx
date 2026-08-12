@@ -6,6 +6,8 @@ import Link from "next/link"
 import { createClient } from "@/utils/supabase/server"
 import EditorListClient from "./EditorListClient"
 import { redirect } from "next/navigation"
+import { SearchInput } from "@/components/SearchInput"
+import { Suspense } from "react"
 
 export const revalidate = 0
 
@@ -74,10 +76,9 @@ export default async function SearchEditorsPage() {
           
           {/* Search Bar */}
           <div className="flex flex-col md:flex-row gap-4 max-w-4xl">
-            <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={20} />
-              <Input className="pl-12 h-14 text-lg" placeholder="Search by software, category, or name..." />
-            </div>
+            <Suspense fallback={<div className="flex-1 h-14 bg-slate-200 animate-pulse rounded-md" />}>
+              <SearchInput placeholder="Search by software, category, or name..." />
+            </Suspense>
             <Button size="lg" className="h-14 bg-tertiary text-foreground hover:bg-quaternary">
               <Filter className="mr-2" /> Filters
             </Button>
@@ -87,7 +88,9 @@ export default async function SearchEditorsPage() {
 
       {/* Results Grid */}
       <div className="max-w-7xl mx-auto px-6 pt-12 w-full">
-        <EditorListClient initialEditors={editors || []} />
+        <Suspense fallback={<div className="h-64 bg-slate-200 animate-pulse rounded-2xl w-full" />}>
+          <EditorListClient initialEditors={editors || []} />
+        </Suspense>
       </div>
     </div>
   )

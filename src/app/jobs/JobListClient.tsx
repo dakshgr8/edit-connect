@@ -6,10 +6,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { IndianRupee, Clock, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
 export default function JobListClient({ initialProjects }: { initialProjects: any[] }) {
   const [projects, setProjects] = useState(initialProjects)
   const supabase = createClient()
+  const searchParams = useSearchParams()
+  const q = searchParams.get('q')?.toLowerCase() || ''
 
   useEffect(() => {
     const channel = supabase
@@ -31,22 +34,29 @@ export default function JobListClient({ initialProjects }: { initialProjects: an
     }
   }, [supabase])
 
+  const filteredProjects = projects.filter(p => 
+    !q || 
+    p.title.toLowerCase().includes(q) || 
+    (p.description && p.description.toLowerCase().includes(q)) ||
+    (p.category && p.category.toLowerCase().includes(q))
+  )
+
   return (
     <>
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold font-display">Latest Open Projects</h2>
-        <span className="font-bold text-muted-foreground">{projects.length} jobs found</span>
+        <span className="font-bold text-muted-foreground">{filteredProjects.length} jobs found</span>
       </div>
 
       <div className="space-y-6">
-        {projects.length === 0 ? (
+        {filteredProjects.length === 0 ? (
           <Card className="shadow-none border-dashed border-2">
             <CardContent className="p-12 text-center text-muted-foreground font-bold text-lg">
-              No open projects found right now. Check back later!
+              No projects found matching your search. Try different keywords!
             </CardContent>
           </Card>
         ) : (
-          projects.map((project: any) => (
+          filteredProjects.map((project: any) => (
             <Card key={project.id} className="shadow-[var(--shadow-sticker)] transition-transform hover:-translate-y-1 hover:scale-[1.01] duration-300">
               <div className="flex flex-col md:flex-row p-6 gap-6 justify-between items-start">
                 <div className="space-y-4 flex-1">

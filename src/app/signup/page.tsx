@@ -31,6 +31,19 @@ export default async function SignupPage(props: { searchParams: Promise<{ messag
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" name="password" type="password" placeholder="••••••••" required />
               </div>
+              <div className="space-y-3 pt-2">
+                <Label>I want to...</Label>
+                <div className="grid grid-cols-2 gap-4">
+                  <Label htmlFor="role-client" className="cursor-pointer border-2 border-slate-200 rounded-lg p-4 flex flex-col items-center gap-2 hover:border-accent transition-colors [&:has(:checked)]:border-accent [&:has(:checked)]:bg-accent/10">
+                    <input type="radio" id="role-client" name="role" value="client" className="sr-only" defaultChecked />
+                    <span className="font-bold">Hire Editors</span>
+                  </Label>
+                  <Label htmlFor="role-editor" className="cursor-pointer border-2 border-slate-200 rounded-lg p-4 flex flex-col items-center gap-2 hover:tertiary transition-colors [&:has(:checked)]:border-tertiary [&:has(:checked)]:bg-tertiary/10">
+                    <input type="radio" id="role-editor" name="role" value="editor" className="sr-only" />
+                    <span className="font-bold">Find Work</span>
+                  </Label>
+                </div>
+              </div>
               
               {searchParams?.message && (
                 <p className="text-sm font-bold text-destructive bg-destructive/10 p-3 rounded-lg border-2 border-destructive">

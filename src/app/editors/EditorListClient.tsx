@@ -6,10 +6,13 @@ import { Card, CardContent, CardFooter, CardAction } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Star, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
 export default function EditorListClient({ initialEditors }: { initialEditors: any[] }) {
   const [editors, setEditors] = useState(initialEditors)
   const supabase = createClient()
+  const searchParams = useSearchParams()
+  const q = searchParams.get('q')?.toLowerCase() || ''
 
   useEffect(() => {
     const channel = supabase
@@ -39,10 +42,18 @@ export default function EditorListClient({ initialEditors }: { initialEditors: a
     }
   }, [supabase])
 
+  const filteredEditors = editors.filter(e => 
+    !q || 
+    (e.full_name && e.full_name.toLowerCase().includes(q)) || 
+    (e.about && e.about.toLowerCase().includes(q)) ||
+    (e.category && e.category.toLowerCase().includes(q)) ||
+    (e.primary_software && e.primary_software.toLowerCase().includes(q))
+  )
+
   return (
     <>
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl font-bold font-display">Top Rated Editors ({editors.length})</h2>
+        <h2 className="text-2xl font-bold font-display">Top Rated Editors ({filteredEditors.length})</h2>
         <select className="h-10 rounded-lg border-2 border-foreground bg-white px-3 font-bold shadow-[2px_2px_0px_#1E293B] outline-none">
           <option>Sort by: Rating</option>
           <option>Sort by: Price (Low to High)</option>
@@ -50,15 +61,15 @@ export default function EditorListClient({ initialEditors }: { initialEditors: a
         </select>
       </div>
 
-      {editors.length === 0 ? (
+      {filteredEditors.length === 0 ? (
         <Card className="shadow-none border-dashed border-2">
           <CardContent className="p-12 text-center text-muted-foreground font-bold text-lg">
-            No editors found on the platform yet.
+            No editors found matching your search. Try different keywords!
           </CardContent>
         </Card>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {editors.map((editor: any, i: number) => {
+          {filteredEditors.map((editor: any, i: number) => {
             const tilt = i % 2 === 0 ? "rotate-1" : "-rotate-1"
             const bgColors = ["bg-tertiary", "bg-secondary", "bg-quaternary", "bg-accent"]
             const color = bgColors[i % bgColors.length]
