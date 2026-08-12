@@ -94,13 +94,23 @@ export default async function DashboardPage() {
   }
 
   // Unread messages count (shared for both roles)
-  const { count: unreadCount } = await supabase
-    .from('messages')
-    .select('id', { count: 'exact', head: true })
-    .eq('receiver_id', user.id)
-    .eq('read', false)
-  
-  stats.unreadMessages = unreadCount || 0
+  // Get chats where user is a participant, then count messages they didn't send
+  const { data: userChats } = await supabase
+    .from('chats')
+    .select('id')
+    .or(`client_id.eq.${user.id},editor_id.eq.${user.id}`)
+
+  const chatIds = (userChats || []).map((c: any) => c.id)
+
+  if (chatIds.length > 0) {
+    const { count: msgCount } = await supabase
+      .from('messages')
+      .select('id', { count: 'exact', head: true })
+      .in('chat_id', chatIds)
+      .neq('sender_id', user.id)
+    
+    stats.unreadMessages = msgCount || 0
+  }
 
   return (
     <div className="space-y-8 pb-12">
