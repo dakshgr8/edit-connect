@@ -2,39 +2,13 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Play, Star, Scissors, Video, Users } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { PublicNav } from "@/components/PublicNav"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden font-body">
       {/* Navigation */}
-      <nav className="border-b-2 border-foreground bg-white relative z-20">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-accent text-white p-2 rounded-lg border-2 border-foreground shadow-[2px_2px_0px_#1E293B]">
-              <Scissors size={24} />
-            </div>
-            <span className="font-display font-bold text-2xl tracking-tight">EditConnect</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 font-bold">
-            <Link href="/jobs" className="hover:text-accent transition-colors">Find Work</Link>
-            <Link href="/editors" className="hover:text-secondary transition-colors">Hire Editors</Link>
-            <Link href="#pricing" className="hover:text-tertiary transition-colors">Pricing</Link>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/login" passHref>
-              <Button variant="ghost" className="hidden md:inline-flex font-bold">Log in</Button>
-            </Link>
-            <Link href="/signup" passHref>
-              <Button>
-                Sign Up
-                <div className="bg-white rounded-full p-0.5 ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="text-accent" size={16} />
-                </div>
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <PublicNav />
 
       {/* Hero Section */}
       <section className="relative py-12 lg:py-16 px-6">
