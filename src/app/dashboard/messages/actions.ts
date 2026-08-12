@@ -49,30 +49,30 @@ export async function startChat(editorId: string, projectId?: string) {
     .order("created_at", { ascending: false })
     .limit(1)
 
-  let chat = existingChats?.[0]
+    let chat: any = existingChats?.[0]
 
-  if (!chat) {
-    const { data: newChat, error } = await supabase
-      .from("chats")
-      .insert({
-        client_id: clientId,
-        editor_id: editorId,
-        project_id: projectId || null
-      })
-      .select("id")
-      .single()
-      
-    if (error) throw error
-    chat = newChat
-  } else if (projectId && chat.project_id !== projectId) {
-    // If they apply to a new project, update the chat to reference the new project
-    await supabase
-      .from("chats")
-      .update({ project_id: projectId })
-      .eq("id", chat.id)
-  }
+    if (!chat) {
+      const { data: newChat, error } = await supabase
+        .from("chats")
+        .insert({
+          client_id: clientId,
+          editor_id: editorId,
+          project_id: projectId || null
+        })
+        .select("id, project_id")
+        .single()
+        
+      if (error) throw error
+      chat = newChat
+    } else if (projectId && chat.project_id !== projectId) {
+      // If they apply to a new project, update the chat to reference the new project
+      await supabase
+        .from("chats")
+        .update({ project_id: projectId })
+        .eq("id", chat.id)
+    }
 
-  return chat.id
+    return chat?.id
 }
 
 export async function acceptProject(projectId: string) {
