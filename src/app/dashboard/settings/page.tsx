@@ -32,7 +32,7 @@ export default async function SettingsPage() {
           <CardContent className="p-8 space-y-6">
             <h2 className="text-2xl font-bold font-display border-b-2 border-border pb-4">Profile Information</h2>
             
-            <form action={updateProfile} className="space-y-6">
+            <form key={profile?.updated_at || 'settings-form'} action={updateProfile} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="full_name">Full Name</Label>
