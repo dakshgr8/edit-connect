@@ -31,7 +31,7 @@ export default async function DashboardPage() {
   let stats = {
     appliedJobs: 0,
     activeProjects: 0,
-    portfolioViews: 340, // Placeholder
+    portfolioViews: 0,
     totalEarnings: 0,
     totalSpent: 0,
     pendingReview: 0,
@@ -111,7 +111,7 @@ export default async function DashboardPage() {
           <>
             <StatCard title="Applied Jobs" value={stats.appliedJobs.toString()} icon={<Briefcase size={24} />} color="bg-accent" />
             <StatCard title="Active Projects" value={stats.activeProjects.toString()} icon={<Video size={24} />} color="bg-tertiary" />
-            <StatCard title="Portfolio Views" value="340" icon={<Eye size={24} />} color="bg-secondary" />
+            <StatCard title="Portfolio Views" value={stats.portfolioViews.toString()} icon={<Eye size={24} />} color="bg-secondary" />
             <StatCard title="Total Earnings" value="₹0" icon={<span className="text-xl font-black">₹</span>} color="bg-quaternary" />
           </>
         ) : (
