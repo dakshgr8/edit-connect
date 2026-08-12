@@ -18,9 +18,13 @@ export default async function NewProjectPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("membership_tier")
+    .select("role, membership_tier")
     .eq("id", user.id)
     .single()
+
+  if (profile?.role === 'editor') {
+    redirect("/dashboard")
+  }
 
   const hasMembership = profile?.membership_tier && profile.membership_tier !== 'none'
 

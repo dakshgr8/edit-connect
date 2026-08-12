@@ -5,6 +5,7 @@ import { Search, Filter, Star, Play, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/utils/supabase/server"
 import EditorListClient from "./EditorListClient"
+import { redirect } from "next/navigation"
 
 export const revalidate = 0
 
@@ -32,6 +33,12 @@ export default async function SearchEditorsPage() {
   })
 
   const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single()
+    if (profile?.role === 'editor') {
+      redirect("/dashboard")
+    }
+  }
 
   return (
     <div className="min-h-screen bg-muted flex flex-col font-body pb-24">

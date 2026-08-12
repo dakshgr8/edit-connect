@@ -24,6 +24,14 @@ export default async function EditorProfilePage({ params }: { params: Promise<{ 
     notFound()
   }
 
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single()
+    if (profile?.role === 'editor') {
+      redirect("/dashboard")
+    }
+  }
+
   // Calculate ratings
   const ratedProjects = (editor.projects as any[] || []).filter((p) => p.rating !== null && p.rating !== undefined)
   const reviewCount = ratedProjects.length

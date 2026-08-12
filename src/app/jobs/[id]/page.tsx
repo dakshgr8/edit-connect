@@ -32,9 +32,13 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("membership_tier")
+      .select("role, membership_tier")
       .eq("id", user.id)
       .single()
+      
+    if (profile?.role === 'client') {
+      redirect("/dashboard")
+    }
       
     if (profile) membershipTier = profile.membership_tier
 

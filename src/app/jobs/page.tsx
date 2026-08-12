@@ -5,6 +5,7 @@ import { Search, Filter, Briefcase, IndianRupee, Clock, CheckCircle } from "luci
 import Link from "next/link"
 import { createClient } from "@/utils/supabase/server"
 import JobListClient from "./JobListClient"
+import { redirect } from "next/navigation"
 
 export const revalidate = 0 // always fetch live data
 
@@ -19,6 +20,12 @@ export default async function JobsPage() {
     .order("created_at", { ascending: false })
 
   const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single()
+    if (profile?.role === 'client') {
+      redirect("/dashboard")
+    }
+  }
 
   return (
     <div className="min-h-screen bg-muted flex flex-col font-body pb-24">
