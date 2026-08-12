@@ -93,6 +93,15 @@ export default async function DashboardPage() {
     stats.activeProjects = activeCount || 0
   }
 
+  // Unread messages count (shared for both roles)
+  const { count: unreadCount } = await supabase
+    .from('messages')
+    .select('id', { count: 'exact', head: true })
+    .eq('receiver_id', user.id)
+    .eq('read', false)
+  
+  stats.unreadMessages = unreadCount || 0
+
   return (
     <div className="space-y-8 pb-12">
       {/* Header */}
@@ -127,7 +136,7 @@ export default async function DashboardPage() {
           <>
             <StatCard title="Active Projects" value={stats.activeProjects.toString()} icon={<Video size={24} />} color="bg-accent" />
             <StatCard title="Pending Review" value="0" icon={<CheckCircle size={24} />} color="bg-tertiary" />
-            <StatCard title="Unread Messages" value="0" icon={<MessageCircle size={24} />} color="bg-secondary" />
+            <StatCard title="Unread Messages" value={stats.unreadMessages.toString()} icon={<MessageCircle size={24} />} color="bg-secondary" />
             <StatCard title="Total Spent" value="₹0" icon={<span className="text-xl font-black">₹</span>} color="bg-quaternary" />
           </>
         )}
