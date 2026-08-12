@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${outfit.variable} ${plusJakarta.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-body">{children}</body>
     </html>

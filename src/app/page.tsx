@@ -167,7 +167,7 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-32 relative">
+      <section id="pricing" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center space-y-4 mb-20">
             <h2 className="text-5xl font-display font-extrabold tracking-tight">Simple Pricing</h2>
@@ -191,7 +191,7 @@ export default function Home() {
             </div>
 
             {/* Pro Tier - Scaled up */}
-            <div className="p-8 bg-accent text-white border-2 border-foreground rounded-3xl shadow-[12px_12px_0px_#1E293B] scale-105 relative z-10">
+            <div className="p-8 bg-accent text-white border-2 border-foreground rounded-3xl shadow-[12px_12px_0px_#1E293B] md:scale-105 relative z-10">
               <div className="absolute -top-6 -right-6 bg-tertiary text-foreground border-2 border-foreground px-4 py-2 rounded-full font-bold shadow-[var(--shadow-pop)] rotate-12 animate-wiggle">
                 MOST POPULAR ⭐
               </div>
