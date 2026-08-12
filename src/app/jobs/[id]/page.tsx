@@ -5,7 +5,7 @@ import { ArrowLeft, Clock, IndianRupee, Video, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/utils/supabase/server"
 import { applyToJob } from "./actions"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
