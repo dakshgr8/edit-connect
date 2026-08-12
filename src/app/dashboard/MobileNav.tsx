@@ -30,7 +30,7 @@ export function MobileNav({ userRole }: { userRole: string }) {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 top-[73px] z-30 bg-white flex flex-col border-t-2 border-foreground h-[calc(100vh-73px)]">
+        <div className="md:hidden fixed inset-0 top-[73px] bottom-0 z-30 bg-white flex flex-col border-t-2 border-foreground">
           <nav className="flex-1 overflow-y-auto p-4 space-y-2">
             <SidebarLink href="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" pathname={pathname} onClick={closeMenu} exact />
             
@@ -53,7 +53,7 @@ export function MobileNav({ userRole }: { userRole: string }) {
             <SidebarLink href="/dashboard/settings" icon={<Settings size={20} />} label="Settings" pathname={pathname} onClick={closeMenu} />
           </nav>
           
-          <div className="p-4 border-t-2 border-foreground bg-white">
+          <div className="p-4 pb-8 md:pb-4 border-t-2 border-foreground bg-white shrink-0">
             <form action={logout}>
               <Button type="submit" variant="ghost" className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive font-bold text-lg h-12">
                 <LogOut size={24} className="mr-2" />
