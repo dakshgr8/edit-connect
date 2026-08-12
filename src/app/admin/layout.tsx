@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/utils/supabase/server"
 import { AdminSidebar } from "./Sidebar"
+import { MobileAdminNav } from "./MobileAdminNav"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -26,11 +27,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="min-h-screen bg-slate-100 flex font-body">
-      {/* Client Sidebar */}
+      {/* Desktop Sidebar */}
       <AdminSidebar />
 
       {/* Main Content Area */}
       <main className="flex-1 min-w-0 flex flex-col min-h-screen relative overflow-hidden">
+        {/* Mobile Header & Navigation */}
+        <MobileAdminNav />
         {/* Subtle background pattern for admin */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-200 to-transparent opacity-50 pointer-events-none" />
         
