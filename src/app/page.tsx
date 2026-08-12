@@ -103,9 +103,9 @@ export default function Home() {
           </div>
 
           {/* Right Image/Graphic area */}
-          <div className="relative w-full h-[500px] hidden lg:block">
+          <div className="relative w-full h-[350px] sm:h-[450px] lg:h-[500px] mt-12 lg:mt-0">
             {/* Image container */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[450px] h-[450px] border-4 border-foreground bg-accent rounded-[100px_40px_100px_40px] overflow-hidden shadow-[12px_12px_0px_#1E293B] group">
+            <div className="absolute lg:right-0 left-1/2 lg:left-auto -translate-x-1/2 lg:translate-x-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[450px] lg:h-[450px] border-4 border-foreground bg-accent rounded-[60px_24px_60px_24px] lg:rounded-[100px_40px_100px_40px] overflow-hidden shadow-[8px_8px_0px_#1E293B] lg:shadow-[12px_12px_0px_#1E293B] group">
               <Image 
                 src="/hero-editor.jpg" 
                 alt="Video Editor Illustration" 
@@ -115,7 +115,7 @@ export default function Home() {
             </div>
 
             {/* Floating Element 1 */}
-            <div className="absolute top-12 right-[480px] bg-white border-2 border-foreground p-4 rounded-2xl shadow-[var(--shadow-pop)] animate-[bounce_4s_infinite]">
+            <div className="absolute top-4 lg:top-12 left-0 sm:left-12 lg:left-auto lg:right-[400px] xl:right-[480px] bg-white border-2 border-foreground p-3 lg:p-4 rounded-xl lg:rounded-2xl shadow-[var(--shadow-pop)] animate-[bounce_4s_infinite] z-20 scale-75 lg:scale-100 origin-top-left">
               <div className="flex gap-3 items-center">
                 <div className="bg-tertiary p-2 rounded-full border-2 border-foreground">
                   <Video size={20} className="text-foreground" />
@@ -128,8 +128,8 @@ export default function Home() {
             </div>
 
             {/* Floating Element 2 */}
-            <div className="absolute bottom-24 -right-4 bg-secondary text-white border-2 border-foreground px-6 py-3 rounded-full shadow-[var(--shadow-pop)] animate-[bounce_5s_infinite_reverse] rotate-6">
-              <span className="font-bold font-display text-xl tracking-wide">MATCHED! 💥</span>
+            <div className="absolute bottom-4 lg:bottom-24 right-0 sm:right-12 lg:-right-4 bg-secondary text-white border-2 border-foreground px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-[var(--shadow-pop)] animate-[bounce_5s_infinite_reverse] rotate-6 z-20 scale-75 lg:scale-100 origin-bottom-right">
+              <span className="font-bold font-display text-lg lg:text-xl tracking-wide">MATCHED! 💥</span>
             </div>
           </div>
 
