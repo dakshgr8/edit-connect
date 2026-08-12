@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowLeft, Star, CheckCircle, Video, IndianRupee, Link as LinkIcon, MessageCircle } from "lucide-react"
 import Link from "next/link"
-import { createClient } from "@/utils/supabase/server"
+import { createClient, createAdminClient } from "@/utils/supabase/server"
 import { notFound, redirect } from "next/navigation"
 
 export const dynamic = 'force-dynamic'
@@ -32,9 +32,10 @@ export default async function EditorProfilePage({ params }: { params: Promise<{ 
     }
   }
 
-  // Track profile view (don't count self-views)
+  // Track profile view (don't count self-views) — uses admin client to bypass RLS
   if (!user || user.id !== id) {
-    supabase
+    const adminClient = createAdminClient()
+    adminClient
       .from("profiles")
       .update({ view_count: (editor.view_count || 0) + 1 })
       .eq("id", id)
