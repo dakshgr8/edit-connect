@@ -15,7 +15,7 @@ export async function login(formData: FormData) {
   const { data: authData, error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
-    redirect("/login?message=Could not authenticate user")
+    redirect(`/login?message=${encodeURIComponent(error.message)}`)
   }
 
   // Check role for smart redirect
