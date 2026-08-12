@@ -32,6 +32,15 @@ export default async function EditorProfilePage({ params }: { params: Promise<{ 
     }
   }
 
+  // Track profile view (don't count self-views)
+  if (!user || user.id !== id) {
+    supabase
+      .from("profiles")
+      .update({ view_count: (editor.view_count || 0) + 1 })
+      .eq("id", id)
+      .then(() => {})
+  }
+
   // Calculate ratings
   const ratedProjects = (editor.projects as any[] || []).filter((p) => p.rating !== null && p.rating !== undefined)
   const reviewCount = ratedProjects.length

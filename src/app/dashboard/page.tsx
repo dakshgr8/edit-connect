@@ -64,6 +64,15 @@ export default async function DashboardPage() {
       .eq('status', 'accepted')
       
     stats.activeProjects = activeCount || 0
+
+    // Fetch real portfolio view count
+    const { data: editorProfile } = await supabase
+      .from('profiles')
+      .select('view_count')
+      .eq('id', user.id)
+      .single()
+    
+    stats.portfolioViews = editorProfile?.view_count || 0
   } else {
     // Client Data
     const { data: projects } = await supabase
